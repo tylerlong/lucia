@@ -2,8 +2,9 @@ import './index.css'
 
 import ReactDOM from 'react-dom';
 import React from 'react';
-import {Button} from 'antd';
+
+import App from './main';
 
 const container = document.createElement('div');
 document.body.appendChild(container);
-ReactDOM.render(<Button type="primary">Hello world</Button>, container);
+ReactDOM.render(<App />, container);
