@@ -3,3 +3,8 @@
 body {
   padding: 16px;
 }
+
+.center {
+  margin: 0 auto;
+  display: block;
+}

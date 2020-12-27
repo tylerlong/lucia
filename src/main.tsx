@@ -14,7 +14,7 @@ class App extends React.Component {
       <img id="display1" height="256px"/>
       <img id="display2" height="256px"/>
       <hr/>
-      <img id="result" height="256px"/>
+      <img id="result" height="256px" className="center"/>
     </div>
   }
 
@@ -35,7 +35,8 @@ class App extends React.Component {
     if(img1.src !== '' && img2.src !== '') {
       gifshot.createGIF({
         images: [img1, img2],
-        gifHeight: 256
+        gifHeight: 256,
+        frameDuration: 5,
       }, function(obj: any) {
         if(!obj.error) {
           (document.getElementById('result') as HTMLImageElement).src = obj.image;
