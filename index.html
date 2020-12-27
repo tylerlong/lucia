@@ -6,18 +6,26 @@
   <body>
     <h1>Lucia</h1>
     <input type="file" id="upload1" onchange="doIt()"/>
-    <img id="display1"/>
+    <input type="file" id="upload2" onchange="doIt()"/>
+    <hr/>
+    <img id="display1" height="128px"/>
+    <img id="display2" height="128px"/>
     <script src="gifshot.js"></script>
     <script>
       function doIt() {
-        console.log('doIt');
-        const element = document.getElementById('upload1');
-        var file = element.files[0];
-        var reader = new FileReader();
-        reader.readAsBinaryString(file);
-        reader.onload = function() {
-          document.getElementById('display1').src=`data:image/png;base64,${btoa(reader.result)}`;
-        };
+        load(1);
+        load(2);
+      }
+      function load(index) {
+        const element = document.getElementById(`upload${index}`);
+        const file = element.files[0];
+        if(file) {
+          const reader = new FileReader();
+          reader.readAsBinaryString(file);
+          reader.onload = function() {
+            document.getElementById(`display${index}`).src=`data:image/png;base64,${btoa(reader.result)}`;
+          };
+        }
       }
     </script>
   </body>
