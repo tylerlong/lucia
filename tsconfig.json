@@ -5,6 +5,10 @@
     "esModuleInterop": true,
     "lib": ["DOM"],
     "jsx": "react",
+    "typeRoots": [
+      "src/typings",
+      "node_modules/@types"
+    ],
   },
   "include": [
     "src/**/*.ts",
