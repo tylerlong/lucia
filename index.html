@@ -1,32 +1,48 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Lucia</title>
+    <title>Project Lucia</title>
   </head>
   <body>
-    <h1>Lucia</h1>
-    <input type="file" id="upload1" onchange="doIt()"/>
-    <input type="file" id="upload2" onchange="doIt()"/>
+    <h1>Project Lucia</h1>
+    <p>
+      Lucia is derived from lux, the Latin word for light.
+    </p>
+    <input type="file" id="upload1" onchange="load(1)"/>
+    <input type="file" id="upload2" onchange="load(2)"/>
     <hr/>
-    <img id="display1" height="128px"/>
-    <img id="display2" height="128px"/>
+    <img id="display1" height="256px"/>
+    <img id="display2" height="256px"/>
+    <hr/>
+    <img id="result"/>
     <script src="gifshot.js"></script>
     <script>
-      function doIt() {
-        load(1);
-        load(2);
-      }
       function load(index) {
         const element = document.getElementById(`upload${index}`);
         const file = element.files[0];
-        if(file) {
-          const reader = new FileReader();
-          reader.readAsBinaryString(file);
-          reader.onload = function() {
-            document.getElementById(`display${index}`).src=`data:image/png;base64,${btoa(reader.result)}`;
-          };
+        const reader = new FileReader();
+        reader.readAsBinaryString(file);
+        reader.onload = function() {
+          document.getElementById(`display${index}`).src=`data:image/png;base64,${btoa(reader.result)}`;
+          makeGif();
+        };
+      }
+
+      function makeGif() {
+        const img1 = document.getElementById('display1');
+        const img2 = document.getElementById('display2');
+        if(img1.src !== '' && img2.src !== '') {
+          gifshot.createGIF({
+            images: [img1, img2]
+          }, function(obj) {
+            if(!obj.error) {
+              animatedImage = document.getElementById('result');
+              animatedImage.src = obj.image;
+            }
+          });
         }
       }
+
     </script>
   </body>
 </html>
