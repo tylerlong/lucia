@@ -14,7 +14,7 @@
     <img id="display1" height="256px"/>
     <img id="display2" height="256px"/>
     <hr/>
-    <img id="result"/>
+    <img id="result" height="256px"/>
     <script src="gifshot.js"></script>
     <script>
       function load(index) {
@@ -33,7 +33,8 @@
         const img2 = document.getElementById('display2');
         if(img1.src !== '' && img2.src !== '') {
           gifshot.createGIF({
-            images: [img1, img2]
+            images: [img1, img2],
+            gifHeight: 256
           }, function(obj) {
             if(!obj.error) {
               animatedImage = document.getElementById('result');
