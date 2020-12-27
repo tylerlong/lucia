@@ -1,13 +1,23 @@
 <!DOCTYPE html>
 <html>
-  <head></head>
+  <head>
+    <title>Lucia</title>
+  </head>
   <body>
     <h1>Lucia</h1>
     <input type="file" id="upload1" onchange="doIt()"/>
+    <img id="display1"/>
     <script src="gifshot.js"></script>
     <script>
       function doIt() {
         console.log('doIt');
+        const element = document.getElementById('upload1');
+        var file = element.files[0];
+        var reader = new FileReader();
+        reader.readAsBinaryString(file);
+        reader.onload = function() {
+          document.getElementById('display1').src=`data:image/png;base64,${btoa(reader.result)}`;
+        };
       }
     </script>
   </body>
