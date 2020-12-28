@@ -5,7 +5,7 @@
     "node": ">=14"
   },
   "scripts": {
-    "serve": "webpack serve",
+    "serve": "webpack serve --hot",
     "release": "webpack --progress"
   },
   "dependencies": {
