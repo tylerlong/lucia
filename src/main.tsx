@@ -15,18 +15,17 @@ class App extends React.Component {
   }
 
   render() {
+    const size = 5;
     return <div>
       <h1>Project Lucia</h1>
       <p>
         Lucia is derived from lux, the Latin word for light.
       </p>
-      <input type="file" onChange={e => this.change(0)} ref={element => this.inputElements.push(element!)}/>
-      <input type="file" onChange={e => this.change(1)} ref={element => this.inputElements.push(element!)}/>
+      {new Array(size).fill(1).map((e, i) => <input type="file" onChange={e => this.change(i)} ref={element => this.inputElements.push(element!)} key={i}/>)}
       <br/><br/>Animation speed: <Slider min={1} max={100} defaultValue={10} 
         onAfterChange={() => this.makeGif()} ref={(element: typeof Slider) => this.slider = element}/>
       <hr/>
-      <img height="256px" ref={element => this.imageElements.push(element!)}/>
-      <img height="256px" ref={element => this.imageElements.push(element!)}/>
+      {new Array(size).fill(1).map((e, i) => <img height="256px" ref={element => this.imageElements.push(element!)} key={i}/>)}
       <hr/>
       <img height="256px" className="center" ref={element => this.resultImage = element!}/>
     </div>
