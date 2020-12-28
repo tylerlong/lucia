@@ -6,6 +6,7 @@ class App extends React.Component {
   slider?: typeof Slider;
   inputElements: HTMLInputElement[];
   imageElements: HTMLImageElement[];
+  resultImage?: HTMLImageElement;
 
   constructor(props: any) {
     super(props);
@@ -27,7 +28,7 @@ class App extends React.Component {
       <img id="display0" height="256px" ref={element => this.imageElements.push(element!)}/>
       <img id="display1" height="256px" ref={element => this.imageElements.push(element!)}/>
       <hr/>
-      <img id="result" height="256px" className="center"/>
+      <img id="result" height="256px" className="center" ref={element => this.resultImage = element!}/>
     </div>
   }
 
@@ -51,9 +52,9 @@ class App extends React.Component {
         images: [img1, img2],
         gifHeight: 256,
         frameDuration: 100 / sliderValue,
-      }, function(obj: any) {
+      }, (obj: any) => {
         if(!obj.error) {
-          (document.getElementById('result') as HTMLImageElement).src = obj.image;
+          this.resultImage!.src = obj.image;
         }
       });
     }
