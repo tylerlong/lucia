@@ -18,7 +18,7 @@ class App extends React.Component {
       </p>
       <input type="file" id="upload1" onChange={e => this.change(1)} />
       <input type="file" id="upload2" onChange={e => this.change(2)} />
-      <br/>Animation speed: <Slider min={1} max={100} defaultValue={10} onAfterChange={() => this.makeGif()} ref={this.sliderRef}/>
+      <br/><br/>Animation speed: <Slider min={1} max={100} defaultValue={10} onAfterChange={() => this.makeGif()} ref={this.sliderRef}/>
       <hr/>
       <img id="display1" height="256px"/>
       <img id="display2" height="256px"/>
