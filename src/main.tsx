@@ -20,15 +20,15 @@ class App extends React.Component {
       <p>
         Lucia is derived from lux, the Latin word for light.
       </p>
-      <input type="file" id="upload0" onChange={e => this.change(0)} ref={element => this.inputElements.push(element!)}/>
-      <input type="file" id="upload1" onChange={e => this.change(1)} ref={element => this.inputElements.push(element!)}/>
+      <input type="file" onChange={e => this.change(0)} ref={element => this.inputElements.push(element!)}/>
+      <input type="file" onChange={e => this.change(1)} ref={element => this.inputElements.push(element!)}/>
       <br/><br/>Animation speed: <Slider min={1} max={100} defaultValue={10} 
         onAfterChange={() => this.makeGif()} ref={(element: typeof Slider) => this.slider = element}/>
       <hr/>
-      <img id="display0" height="256px" ref={element => this.imageElements.push(element!)}/>
-      <img id="display1" height="256px" ref={element => this.imageElements.push(element!)}/>
+      <img height="256px" ref={element => this.imageElements.push(element!)}/>
+      <img height="256px" ref={element => this.imageElements.push(element!)}/>
       <hr/>
-      <img id="result" height="256px" className="center" ref={element => this.resultImage = element!}/>
+      <img height="256px" className="center" ref={element => this.resultImage = element!}/>
     </div>
   }
 
@@ -45,11 +45,9 @@ class App extends React.Component {
 
   makeGif() {
     const sliderValue = (this.slider! as any).state.value;
-    const img1 = document.getElementById('display0') as HTMLImageElement;
-    const img2 = document.getElementById('display1') as HTMLImageElement;
-    if(img1.src !== '' && img2.src !== '') {
+    if(!this.imageElements.some(element => element.src === '')) {
       gifshot.createGIF({
-        images: [img1, img2],
+        images: this.imageElements,
         gifHeight: 256,
         frameDuration: 100 / sliderValue,
       }, (obj: any) => {
