@@ -27,6 +27,7 @@ class App extends React.Component {
       <hr/>
       {new Array(size).fill(1).map((e, i) => <img height="256px" ref={element => this.imageElements.push(element!)} key={i}/>)}
       <hr/>
+      Preview: <br/>
       <img height="256px" className="center" ref={element => this.resultImage = element!}/>
     </div>
   }
@@ -44,9 +45,8 @@ class App extends React.Component {
 
   makeGif() {
     const sliderValue = (this.slider! as any).state.value;
-    if(!this.imageElements.some(element => element.src === '')) {
       gifshot.createGIF({
-        images: this.imageElements,
+        images: this.imageElements.filter(e => e.src !== ''),
         gifHeight: 256,
         frameDuration: 100 / sliderValue,
       }, (obj: any) => {
@@ -54,7 +54,6 @@ class App extends React.Component {
           this.resultImage!.src = obj.image;
         }
       });
-    }
   }
 }
 
