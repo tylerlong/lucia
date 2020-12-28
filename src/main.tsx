@@ -4,10 +4,12 @@ import { Slider } from 'antd';
 
 class App extends React.Component {
   sliderRef: React.RefObject<typeof Slider>;
+  imageElements: HTMLInputElement[];
 
   constructor(props: any) {
     super(props);
     this.sliderRef = React.createRef();
+    this.imageElements = [];
   }
 
   render() {
@@ -16,19 +18,19 @@ class App extends React.Component {
       <p>
         Lucia is derived from lux, the Latin word for light.
       </p>
-      <input type="file" id="upload1" onChange={e => this.change(1)} />
-      <input type="file" id="upload2" onChange={e => this.change(2)} />
+      <input type="file" id="upload0" onChange={e => this.change(0)} ref={element => this.imageElements.push(element!)}/>
+      <input type="file" id="upload1" onChange={e => this.change(1)} ref={element => this.imageElements.push(element!)}/>
       <br/><br/>Animation speed: <Slider min={1} max={100} defaultValue={10} onAfterChange={() => this.makeGif()} ref={this.sliderRef}/>
       <hr/>
+      <img id="display0" height="256px"/>
       <img id="display1" height="256px"/>
-      <img id="display2" height="256px"/>
       <hr/>
       <img id="result" height="256px" className="center"/>
     </div>
   }
 
   change(index: number) {
-    const element = document.getElementById(`upload${index}`) as HTMLInputElement;
+    const element = this.imageElements[index];
     const file = element.files![0];
     const reader = new FileReader();
     reader.readAsBinaryString(file);
@@ -40,8 +42,8 @@ class App extends React.Component {
 
   makeGif() {
     const sliderValue = (this.sliderRef.current as any).state.value;
-    const img1 = document.getElementById('display1') as HTMLImageElement;
-    const img2 = document.getElementById('display2') as HTMLImageElement;
+    const img1 = document.getElementById('display0') as HTMLImageElement;
+    const img2 = document.getElementById('display1') as HTMLImageElement;
     if(img1.src !== '' && img2.src !== '') {
       gifshot.createGIF({
         images: [img1, img2],
